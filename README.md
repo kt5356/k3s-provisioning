@@ -1,12 +1,12 @@
 # k3s-provisioning
 
-A repo containing the simple ansible playbooks I created to setup and install [k3s] (https://k3s.io) 
+A repo containing the simple ansible playbooks I created to setup and install [k3s](https://k3s.io) 
 on my Raspberry Pi cluster. 
 
 ## Prerequisites 
-- [Raspberry Pi OS] (https://www.raspberrypi.com/software/) installed.
+- [Raspberry Pi OS](https://www.raspberrypi.com/software/) installed.
 - SSH is enabled on the Pi's.
-- [Ansible] (https://www.ansible.com) has been installed on your local machine.
+- [Ansible](https://www.ansible.com) has been installed on your local machine.
 -  Pi's given static ip mappings on your local DHCP server.
 
 ## Runing things
