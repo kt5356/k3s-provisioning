@@ -7,8 +7,12 @@ on my Raspberry Pi cluster.
 - [Raspberry Pi OS|https://www.raspberrypi.com/software/] installed.
 - SSH is enabled on the Pi's.
 - [Ansible|https://www.ansible.com] has been installed on your local machine.
+-  Pi's given static ip mappings on your local DHCP server.
 
-## Run order
+## Runing things
+Populate the `inventory/hosts.yaml` file with the hostnames/ips of your 
+main and worker nodes.
+
 The playbooks should be run in the following order.
 - setup.yaml
 - cluster.yaml
