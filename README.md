@@ -1,7 +1,7 @@
 # k3s-provisioning
 
-A repo containing the simple ansible playbooks I created to setup and install [k3s](https://k3s.io) 
-on my Raspberry Pi cluster. 
+A repo containing the simple ansible playbooks I created to setup and install [k3s](https://k3s.io) and create 
+an NFS shared mount on my Raspberry Pi cluster. 
 
 ## Prerequisites 
 - [Raspberry Pi OS](https://www.raspberrypi.com/software/) installed.
