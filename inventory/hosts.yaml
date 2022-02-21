@@ -1,0 +1,27 @@
+---
+
+main:
+  hosts:
+    kube-main-1:
+      ansible_host: 192.168.86.200
+
+nodes:
+  hosts:
+    kube-node-1:
+      ansible_host: 192.168.86.201
+    kube-node-2:
+      ansible_host: 192.168.86.202
+    kube-node-3:
+      ansible_host: 192.168.86.203
+    kube-node-4:
+      ansible_host: 192.168.86.204
+    kube-node-5:
+      ansible_host: 192.168.86.205
+    kube-node-6:
+      ansible_host: 192.168.86.206
+
+cluster:
+  children:
+    main:
+    nodes:
+  

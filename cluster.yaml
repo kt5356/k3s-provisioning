@@ -1,0 +1,13 @@
+---
+- hosts: main
+  become: yes 
+  roles:
+    - role: k3s/main
+
+- hosts: nodes
+  become: yes 
+  vars:
+    main_ip: "{{ hostvars['kube-main-1']['ansible_default_ipv4']['address'] }}"
+  roles:
+    - role: k3s/node
+

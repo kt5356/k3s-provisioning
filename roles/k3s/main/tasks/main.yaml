@@ -1,0 +1,33 @@
+---
+- name: Mount SSD
+  shell: |
+    sudo mkdir /mnt/ssd
+    sudo mount /dev/sda2 /mnt/ssd
+  ignore_errors: no
+- name: Change mount ownership
+  shell: |
+    sudo chown -R {{ ansible_user_id }}:sudo /mnt/ssd
+- name: Mount on start
+  ansible.posix.mount:
+    path: /mnt/ssd
+    src: /dev/sda2
+    fstype: ext4
+    state: mounted
+- name: Create exports file
+  copy:
+    content: '/mnt/ssd *(rw,no_root_squash,insecure,async,no_subtree_check,anonuid=1000,anongid=1000)'
+    dest: /etc/exports
+- name: start NFS server
+  shell: |
+    sudo apt install nfs-kernel-server -y
+    sudo exportfs -ra
+- name: Install k3s mainnode 
+  shell: |
+    curl -sfL https://get.k3s.io | sh -
+- name: Read node-token from master
+  slurp:
+    path: "/var/lib/rancher/k3s/server/node-token"
+  register: node_token
+- name: Store Main node-token
+  set_fact:
+    token: "{{ node_token.content | b64decode | regex_replace('\n', '') }}"

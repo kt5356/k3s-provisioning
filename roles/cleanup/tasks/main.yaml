@@ -1,0 +1,6 @@
+---
+- name: 'Delete pi user'
+  ansible.builtin.user:
+    name: pi
+    state: absent
+    remove: yes

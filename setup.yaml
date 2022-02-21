@@ -1,0 +1,16 @@
+---
+- hosts: cluster
+  become: yes 
+  vars_prompt:
+    - name: username
+      prompt: "New user's name?"
+      private: no
+
+    - name: password
+      prompt: Enter password
+      private: yes
+      encrypt: sha512_crypt
+      confirm: yes
+      salt_size: 7
+  roles:
+    - role: initial-setup

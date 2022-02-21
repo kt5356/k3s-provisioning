@@ -1,0 +1,16 @@
+---
+- name: Prepare network mount
+  shell: |
+    sudo mkdir /mnt/ssd
+- name: Change mount ownership
+  shell: |
+    sudo chown -R {{ ansible_user_id }}:sudo /mnt/ssd
+- name: Configure mount
+  ansible.posix.mount:
+    path: /mnt/ssd
+    src: "{{ main_ip }}:/mnt/ssd"
+    fstype: nfs
+    state: mounted
+- name: Install k3s
+  ansible.builtin.shell: | 
+    curl -sfL https://get.k3s.io | K3S_URL=https://{{ main_ip }}:6443 K3S_TOKEN={{ hostvars[groups['main'][0]]['token'] }} sh -

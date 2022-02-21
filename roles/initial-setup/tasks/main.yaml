@@ -1,0 +1,23 @@
+---
+- name: apt-get update
+  command: "sudo apt-get update"
+- name: apt-get upgrade
+  command: "sudo apt-get upgrade -y"
+- name: update system locale
+  command: "sudo raspi-config nonint do_change_locale en_US.UTF-8"
+- name: "Change hostname to {{ hostname }}"
+  command: "sudo raspi-config nonint do_hostname {{ inventory_hostname }}"
+- name: 'Create user {username} and add to sudoers'
+  ansible.builtin.user:
+    name: "{{ username }}"
+    group: sudo
+    password: "{{ password }}"
+    createhome: yes
+- name: Activate cgroup support
+  lineinfile:
+    path: /boot/cmdline.txt
+    regexp: '^((?!.*\bcgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory\b).*)$'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
+    backrefs: true
+- name: reboot system
+  reboot:
